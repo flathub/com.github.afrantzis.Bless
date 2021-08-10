@@ -26,7 +26,7 @@ modules:
       no-debuginfo: true
       strip: true
     build-commands:
-      - /usr/lib/sdk/mono5/install.sh
+      - /usr/lib/sdk/mono6/install.sh
 
   - name: gtk-sharp
     sources:
