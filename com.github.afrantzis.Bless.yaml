@@ -28,27 +28,6 @@ modules:
     build-commands:
       - /usr/lib/sdk/mono5/install.sh
 
-  - name: libglade
-    rm-configure: true
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://download.gnome.org/sources/libglade/2.6/libglade-2.6.4.tar.gz
-        sha256: c41d189b68457976069073e48d6c14c183075d8b1d8077cb6dfb8b7c5097add3
-        x-checker-data:
-          type: anitya
-          project-id: 228575
-          stable-only: true
-          url-template: https://download.gnome.org/sources/libglade/${major}.${minor}/libglade-$version.tar.gz
-      - type: shell
-        commands:
-        - rm -f config.guess
-      - type: script
-        commands:
-        - autoreconf -fiv
-        dest-filename: autogen.sh
-
   - name: gtk-sharp
     sources:
       - type: archive
@@ -67,6 +46,7 @@ modules:
           - autoreconf -vfi
 
   - name: bless
+    buildsystem: meson
     config-opts:
       - --without-scrollkeeper
       - --enable-debug
