@@ -30,31 +30,24 @@ modules:
 
   - name: gtk-sharp
     sources:
-      - type: archive
-        url: http://download.mono-project.com/sources/gtk-sharp212/gtk-sharp-2.12.45.tar.gz
-        sha256: 02680578e4535441064aac21d33315daa009d742cab8098ac8b2749d86fffb6a
-        x-checker-data:
-          type: anitya
-          project-id: 12507
-          stable-only: true
-          url-template: http://download.mono-project.com/sources/gtk-sharp${major}${minor}/gtk-sharp-$version.tar.gz
+      - type: git
+        url: https://github.com/mono/gtk-sharp.git
+        commit: 3440993e00c89791c5401ae0dcc7508d81347739
       - type: patch
         path: gtk-sharp2-2.12.12-glib-include.patch
       - type: shell
         commands:
-          - cp -p /usr/share/automake-*/config.{sub,guess} .
-          - autoreconf -vfi
+          - ./bootstrap-2.12 --prefix=/usr
 
   - name: bless
     buildsystem: meson
     config-opts:
-      - --without-scrollkeeper
-      - --enable-debug
+      - -Dtests=false
     post-install:
-      - install -t ${FLATPAK_DEST}/share/appdata/ -Dm644 com.github.afrantzis.Bless.metainfo.xml
+      - install -t ${FLATPAK_DEST}/share/appdata/ -Dm644 ../com.github.afrantzis.Bless.metainfo.xml
       - desktop-file-edit --set-key=Icon --set-value=${FLATPAK_ID} /app/share/applications/bless.desktop
-      - install -D data/bless-48x48.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/apps/${FLATPAK_ID}.png
-      - install -D bless-icon-upscaled.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
+      - install -D ../data/bless-48x48.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/apps/${FLATPAK_ID}.png
+      - install -D ../bless-icon-upscaled.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/${FLATPAK_ID}.png
     sources:
       - type: archive
         url: https://github.com/afrantzis/bless/archive/v0.6.3.tar.gz
@@ -64,10 +57,6 @@ modules:
           project-id: 227362
           stable-only: true
           url-template: https://github.com/afrantzis/bless/archive/v$version.tar.gz
-      - type: patch
-        path: fix-20.patch
-      - type: patch
-        path: e6d923235d6f22e8270df41e168227647ddfdce8.patch
       - type: file
         path: com.github.afrantzis.Bless.metainfo.xml
       - type: file
