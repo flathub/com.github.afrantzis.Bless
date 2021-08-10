@@ -14,6 +14,7 @@
 	<url type="homepage">https://github.com/afrantzis/bless</url>
 	<launchable type="desktop-id">com.github.afrantzis.Bless.desktop</launchable>
 	<releases>
+		<release version="0.6.3" date="2020-10-11"/>
 		<release version="0.6.2" date="2019-04-18"/>
 	</releases>
 	<project_license>GPL-2.0-or-later</project_license>
