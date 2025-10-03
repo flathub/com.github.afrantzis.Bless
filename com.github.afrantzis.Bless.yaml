@@ -2,7 +2,7 @@
 app-id: com.github.afrantzis.Bless
 runtime: org.gnome.Platform
 sdk: org.gnome.Sdk
-runtime-version: '47'
+runtime-version: '48'
 sdk-extensions:
   - org.freedesktop.Sdk.Extension.mono6
 rename-desktop-file: bless.desktop
